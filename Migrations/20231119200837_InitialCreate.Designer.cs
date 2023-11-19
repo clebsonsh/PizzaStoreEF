@@ -10,26 +10,28 @@ using PizzaStore.Models;
 namespace PizzaStoreEF.Migrations
 {
     [DbContext(typeof(PizzaDb))]
-    [Migration("20231119115524_InitialCreate")]
+    [Migration("20231119200837_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.14")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("PizzaStore.Models.Pizza", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
