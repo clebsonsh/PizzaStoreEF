@@ -46,4 +46,15 @@ app.MapGet("/pizza/{id}", async (PizzaDb db, int id) =>
     return Results.Json(pizza);
 });
 
+app.MapPut("/pizza/{id}", async (PizzaDb db, Pizza updatedPizza, int id) =>
+{
+    var pizza = await db.Pizzas.FindAsync(id);
+    if (pizza is null) return Results.NotFound();
+    pizza.Name = updatedPizza.Name;
+    pizza.Description = updatedPizza.Description;
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+
 app.Run();
