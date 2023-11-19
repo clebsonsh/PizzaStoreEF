@@ -29,4 +29,7 @@ app.UseSwaggerUI(c =>
 
 app.MapGet("/", () => "Hello World!");
 
+app.MapGet("/pizzas", async (PizzaDb db) => await db.Pizzas.ToListAsync());
+
+
 app.Run();
