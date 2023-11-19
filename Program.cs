@@ -5,11 +5,14 @@ using PizzaStore.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("Pizzas") ?? "Data Source=Pizzas.db";
-
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSqlite<PizzaDb>(connectionString);
+var connectionString = "server=localhost;user=root;password=password;database=pizza";
+var serverVersion = new MariaDbServerVersion(new Version(10, 6, 12));
+
+builder.Services.AddDbContext<PizzaDb>(options =>
+    options.UseMySql(connectionString, serverVersion)
+);
 
 builder.Services.AddSwaggerGen(c =>
 {
